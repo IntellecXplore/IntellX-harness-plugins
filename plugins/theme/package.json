@@ -1,6 +1,6 @@
 {
   "name": "@local/intellecxplore-theme",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": true,
   "description": "intellecXplore-theme: rebrands the DeepSeek Harness Web UI with the IntellecXplore palette, wordmark, fonts, and running copy.",
   "icon": "./icon.png",

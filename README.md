@@ -74,7 +74,7 @@ dist/<plugin-dir>/<package-name>-<version>.tgz
 Changesets 默认 tag：
 
 ```text
-@local/intellecxplore-theme@1.1.1
+@local/intellecxplore-theme@1.1.2
 ```
 
 手动创建（不推送）：
@@ -88,7 +88,7 @@ node scripts/tag-plugin.mjs plugins/theme
 推送：
 
 ```sh
-git push origin "@local/intellecxplore-theme@1.1.1"
+git push origin "@local/intellecxplore-theme@1.1.2"
 ```
 
 单个插件打包：
@@ -102,9 +102,9 @@ node scripts/pack-plugin.mjs plugins/theme
 单个插件 GitHub Release：
 
 ```sh
-gh release create "@local/intellecxplore-theme@1.1.1" \
+gh release create "@local/intellecxplore-theme@1.1.2" \
   dist/theme/*.tgz \
-  --title "intellecxplore-theme 1.1.1" \
+  --title "intellecxplore-theme 1.1.2" \
   --notes "…"
 ```
 
@@ -143,7 +143,7 @@ gh release create "@local/intellecxplore-theme@1.1.1" \
 
 - 目录：`plugins/theme`
 - 包名：`@local/intellecxplore-theme`
-- 版本：`1.1.1`
+- 版本：`1.1.2`
 - profile：`desktop`，通过 `link:` 指向本目录
 - 文档：`plugins/theme/README.md`、`plugins/theme/AGENTS.md`
 - 技能：`plugins/theme/skills/`（vendored DSH 插件/技能规范）
@@ -169,7 +169,7 @@ monorepo 子包上架时，条目 `url` 指向子目录，`name` 用 `owner/repo
 
 ```sh
 git tag
-# @local/intellecxplore-theme@1.1.1
+# @local/intellecxplore-theme@1.1.2
 ```
 
 后续提交与标签：

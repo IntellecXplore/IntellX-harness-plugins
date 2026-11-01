@@ -4,7 +4,7 @@
 
 ## 当前状态
 
-- 1 个真实插件：`plugins/theme`（`@local/intellecxplore-theme@1.1.1`）。
+- 1 个真实插件：`plugins/theme`（`@local/intellecxplore-theme@1.1.2`）。
 - 结构按 10 个插件设计；新增插件横向复制 `plugins/<name>`。
 - 根 `package.json` 是 private workspace root，不声明 `dsh`。
 

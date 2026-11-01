@@ -10,7 +10,7 @@
 |---|---|
 | 主题色板 | 深蓝 `#000057` + 电光蓝 `#005cff`；覆盖 14 个 `--dsw-alias-*` token，含 light/dark |
 | 字体 | Sora / Noto Sans SC / PingFang SC 字体栈；代码区保持等宽 |
-| 侧栏字标 | `IntellecXplore` wordmark，居中显示；展开态隐藏方形 mark |
+| 侧栏字标 | `IntellecXplore` wordmark，居中显示；右侧 HARNESS 徽标顶部对齐；展开态隐藏方形 mark |
 | 品牌 mark | 折叠 rail 与空白会话 hero 使用 X mark；插件图标、favicon 同步 |
 | 运行文案 | `深度求索中` → `智域探金中`，同时覆盖 `TextShimmer` 的 `data-shimmer-text` 高亮层 |
 | 鲸鱼图标 | running 状态的鲸鱼尾巴替换为 X mark（CSS mask，继承文字颜色） |

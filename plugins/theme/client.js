@@ -125,13 +125,35 @@ window.__ModuleLoader__.load({
 
     function BrandName({ label }) {
       const text = label || "智域探金 · IntellecXplore"
-      return h("span", {
-        role: "img",
-        "aria-label": text,
-        title: text,
-        "data-ix-brand-name": "true",
-        style: maskStyle(WORDMARK, 132, 25, "var(--dsw-alias-label-primary)"),
-      })
+      return h(React.Fragment, null,
+        h("span", {
+          role: "img",
+          "aria-label": text,
+          title: text,
+          "data-ix-brand-name": "true",
+          style: maskStyle(WORDMARK, 132, 25, "var(--dsw-alias-label-primary)"),
+        }),
+        h("span", {
+          "aria-hidden": "true",
+          "data-ix-brand-badge": "true",
+          style: {
+            alignSelf: "flex-start",
+            display: "inline-flex",
+            alignItems: "center",
+            height: 16,
+            padding: "0 6px",
+            borderRadius: 3,
+            background: "var(--dsw-alias-label-primary)",
+            color: "var(--dsw-alias-bg-base)",
+            fontSize: 9,
+            fontWeight: 600,
+            letterSpacing: "0.08em",
+            lineHeight: "16px",
+            whiteSpace: "nowrap",
+            flex: "0 0 auto",
+          },
+        }, "HARNESS")
+      )
     }
 
     function HeroMark({ size = 40, className }) {

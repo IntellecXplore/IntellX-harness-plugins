@@ -51,7 +51,7 @@
 
 ## 当前视觉行为（不要回退）
 
-- 侧栏展开态：`brandMark` 隐藏，`IntellecXplore` wordmark 在整行居中；折叠 rail 与空白会话 hero 仍显示 X mark。
+- 侧栏展开态：`brandMark` 隐藏，`IntellecXplore` wordmark 在整行居中；wordmark 右侧的 HARNESS 徽标顶部对齐；折叠 rail 与空白会话 hero 仍显示 X mark。
 - running 状态：鲸鱼尾巴替换为 X mark；文案显示“智域探金中”，波纹高亮层也必须是“智域探金中”。
 - 设置面板：Light `#fff`，Dark `#2c2c2e`；输入框 Dark `#232324`。
 - favicon 与插件管理器图标使用 `icon.png` / `/intellecxplore/brand/icon.png`。
