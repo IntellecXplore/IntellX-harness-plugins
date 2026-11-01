@@ -1,0 +1,21 @@
+commit=74455412ba468c13a6a6249441ace5043d539b8c
+Source: https://github.com/Thatgfsj/dsh-plugin-skills
+Version directory: 0.2.1-rc.4
+Fetched: 2026-11-01
+License: MIT (see LICENSE)
+
+Local runtime: DeepSeek Harness 0.2.1-rc.5 (desktop profile).
+Upstream baseline: 0.2.1-rc.4, static analysis (not runtime-verified upstream).
+The upstream repository lists 0.2.1-rc.5 as pending/unverified.
+
+Modifications made while vendoring:
+- Moved 0.2.1-rc.4/STATUS.md into dsh-plugin-construction/ and changed the
+  SKILL.md reference from ../STATUS.md to STATUS.md.
+- Did not copy the repository-level scripts/ (validate-skills.mjs,
+  dsh-map.mjs); regenerate the generated tables from the source repository.
+- No prose/content changes.
+
+Discovery: DSH skill discovery is one level deep, so point a configured
+customSkillDirs entry at this skills/ directory (rank 300), or copy the two
+skill directories into ~/.dsh/skills/. Do not point it at a parent that also
+contains unrelated *.md files.

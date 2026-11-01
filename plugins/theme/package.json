@@ -1,0 +1,38 @@
+{
+  "name": "@local/intellecxplore-theme",
+  "version": "1.1.1",
+  "private": true,
+  "description": "intellecXplore-theme: rebrands the DeepSeek Harness Web UI with the IntellecXplore palette, wordmark, fonts, and running copy.",
+  "icon": "./icon.png",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json",
+    "./assets-server": "./assets-server.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.png"
+  },
+  "files": [
+    "index.js",
+    "assets-server.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.png",
+    "assets/*.png",
+    "skills/**/*",
+    "README.md",
+    "AGENTS.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": []
+    }
+  }
+}

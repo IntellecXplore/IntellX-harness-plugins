@@ -1,0 +1,22 @@
+{
+  "name": "intellecxplore-dsh",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.5.1",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "node scripts/check-all.mjs",
+    "pack:all": "node scripts/pack-plugin.mjs --all",
+    "pack:theme": "node scripts/pack-plugin.mjs plugins/theme",
+    "tag:theme": "node scripts/tag-plugin.mjs plugins/theme",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.0"
+  }
+}

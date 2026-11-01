@@ -1,0 +1,8 @@
+- id: ui-brand-official
+  name: '@deepseek-ai/dsh-client-ui-brand-official'
+  disabled: true
+- insert:
+    - id: intellecXplore-theme
+      name: '@local/intellecxplore-theme'
+    - id: intellecXplore-theme-assets
+      name: '@local/intellecxplore-theme/assets-server'
