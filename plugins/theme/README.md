@@ -1,6 +1,6 @@
 # intellecXplore-theme
 
-`@local/intellecxplore-theme` — 用 **智域探金 / IntellecXplore** 品牌重绘 DeepSeek Harness Web UI 的本地插件包。
+`@intellecxplore/plugin-theme` — 用 **智域探金 / IntellecXplore** 品牌重绘 DeepSeek Harness Web UI 的插件包。
 
 > 本包是 monorepo [`intellecxplore-dsh`](../../README.md) 的 `plugins/theme` 包；根工作区命令见根 README。
 
@@ -84,6 +84,11 @@ intellecXplore-theme/
 ## 安装与更新
 
 - 已安装到 `desktop` profile；profile 依赖是 `link:` 指向本目录。
+- npm 安装（发布后）：
+
+  ```sh
+  dsh plugin --profile desktop add @intellecxplore/plugin-theme
+  ```
 - 修改 Client 代码后刷新页面；Host 代码变更需要重启宿主或让新模块行重新加载。
 - 本次使用 `plugin_manager` 的 `set_bundle` 启停来重载插件；不要手写 profile 的 `package.json` / `cordis.patch.yml`。
 - 资产路由可直接验证：
@@ -120,9 +125,8 @@ curl -I http://127.0.0.1:63814/intellecxplore/brand/wordmark.png
 - 全局 `characterData` observer 会在流式输出时收到较多 record；后续可改为按 running 元素局部观察。
 - `document.title` 替换会作用于任何包含 `DeepSeek` 的标题，包括用户命名的 Session。
 - `assets-server` 是子路径插件，按 DSH 规则不读根 `package.json`，该行没有自己的展示元数据。
-- 未声明 `engines.dsh`（当前为本地私有包；分发前应补）。
 - 如启用了第三方主题，其 token 层可能覆盖本插件的品牌 token；设置面板已做局部恢复，其余区域以实际主题为准。
-- 品牌 PNG 来自 `sales.intellecxplore.cn` / `intellecxplore.cn`，随包分发前请确认素材授权。
+- 品牌 PNG 为 IntellecXplore 商标资产，不在 MIT 范围内；见 `NOTICE`。
 
 ## 技能包
 

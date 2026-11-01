@@ -4,7 +4,7 @@
 
 ## 当前状态
 
-- 1 个真实插件：`plugins/theme`（`@local/intellecxplore-theme@1.1.2`）。
+- 1 个真实插件：`plugins/theme`（`@intellecxplore/plugin-theme@1.1.2`）。
 - 结构按 10 个插件设计；新增插件横向复制 `plugins/<name>`。
 - 根 `package.json` 是 private workspace root，不声明 `dsh`。
 
@@ -30,7 +30,7 @@ pnpm release               # changeset publish（只发有变化的包）
 - Client 侧不要 `require` 任何 `@deepseek-ai/dsh-client-*` 包；共享 Client 代码必须构建进各自的 `client.js`（esbuild/tsdown），不能运行时 require 未注册的 workspace 包。
 - 品牌资产保持独立 PNG + Host `webServer` 路由；不要在 `client.js` 内嵌 base64。
 - 每个插件独立版本、独立 tag、独立 tarball；不要用一个仓库版本号覆盖 10 个包。
-- 发布前补 `engines.dsh` 并实测；`private: true` 的包不能 npm publish。
+- `engines.dsh` 已声明 `>=0.2.1-rc.2 <0.3.0`；修改前需实测。npm publish 需要 npm 账号拥有 `@intellecxplore` scope。
 - 安装/重装 profile 统一走 `plugin_manager` 或 `dsh plugin --profile <p> add ...`，不要手写 profile。
 - 不创建空壳插件凑数；市场评审要求真实可运行代码。
 - 不提交中间文档/审查快照；文档只保留 README、AGENTS、包的 README/AGENTS、skills/（含 PROVENANCE/LICENSE）。
@@ -64,4 +64,4 @@ DSH 升级后，`plugins/theme` 的品牌层依赖这些内部结构，失效通
 - 本目录是独立 git 仓库；父 home 仓库不要 add 本目录。
 - tag 格式：`<package-name>@<version>`；`@`/`/` 在 shell 中要加引号。
 - GitHub Release 每个 tag 独立创建，tarball 来自 `dist/<dir>/`。
-- 公开上架前先处理 scope、private、license、品牌授权、`engines.dsh`。
+- 公开上架前检查 scope、license、品牌授权；theme 已补 MIT LICENSE 与品牌 NOTICE。

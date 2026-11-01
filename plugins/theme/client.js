@@ -1,5 +1,5 @@
 window.__ModuleLoader__.load({
-  id: "@local/intellecxplore-theme",
+  id: "@intellecxplore/plugin-theme",
   factory(require) {
     const React = require("react")
     const h = React.createElement
@@ -284,7 +284,7 @@ window.__ModuleLoader__.load({
           tagline: "AI 驱动的外贸增长引擎",
         }))
 
-        ctx.effect(() => ctx.theme.overrideTokens("@local/intellecxplore-theme", TOKENS))
+        ctx.effect(() => ctx.theme.overrideTokens("@intellecxplore/plugin-theme", TOKENS))
 
         ctx.slots.inject("sidebar.brand.mark", () => ctx.slots.register({ name: "sidebar.brand.mark" }, BrandMark))
         ctx.slots.inject("sidebar.brand.name", () => ctx.slots.register({ name: "sidebar.brand.name" }, () => h(BrandName, { label: t("full") })))

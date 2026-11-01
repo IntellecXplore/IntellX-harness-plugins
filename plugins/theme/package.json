@@ -1,8 +1,28 @@
 {
-  "name": "@local/intellecxplore-theme",
+  "name": "@intellecxplore/plugin-theme",
   "version": "1.1.2",
-  "private": true,
-  "description": "intellecXplore-theme: rebrands the DeepSeek Harness Web UI with the IntellecXplore palette, wordmark, fonts, and running copy.",
+  "description": "IntellecXplore brand theme for DeepSeek Harness: palette, wordmark, HARNESS badge, fonts, and running copy.",
+  "license": "MIT",
+  "author": "IntellecXplore",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IntellecXplore/IntellX-harness-plugins.git",
+    "directory": "plugins/theme"
+  },
+  "homepage": "https://github.com/IntellecXplore/IntellX-harness-plugins/tree/main/plugins/theme",
+  "bugs": {
+    "url": "https://github.com/IntellecXplore/IntellX-harness-plugins/issues"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "dsh-theme",
+    "deepseek-harness",
+    "intellecxplore",
+    "branding"
+  ],
+  "engines": {
+    "dsh": ">=0.2.1-rc.2 <0.3.0"
+  },
   "icon": "./icon.png",
   "type": "module",
   "exports": {
@@ -23,8 +43,14 @@
     "assets/*.png",
     "skills/**/*",
     "README.md",
-    "AGENTS.md"
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "NOTICE"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dsh": {
     "bundle": {
       "patch": "./cordis.patch.yml"

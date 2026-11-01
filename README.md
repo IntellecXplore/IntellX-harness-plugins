@@ -21,7 +21,7 @@ intellecxplore-dsh/
 │   └── tag-plugin.mjs
 ├── plugins/
 │   └── theme/                   # 当前唯一真实插件
-│       ├── package.json         # @local/intellecxplore-theme
+│       ├── package.json         # @intellecxplore/plugin-theme
 │       ├── cordis.patch.yml
 │       ├── index.js
 │       ├── assets-server.js
@@ -74,7 +74,7 @@ dist/<plugin-dir>/<package-name>-<version>.tgz
 Changesets 默认 tag：
 
 ```text
-@local/intellecxplore-theme@1.1.2
+@intellecxplore/plugin-theme@1.1.2
 ```
 
 手动创建（不推送）：
@@ -88,7 +88,7 @@ node scripts/tag-plugin.mjs plugins/theme
 推送：
 
 ```sh
-git push origin "@local/intellecxplore-theme@1.1.2"
+git push origin "@intellecxplore/plugin-theme@1.1.2"
 ```
 
 单个插件打包：
@@ -102,7 +102,7 @@ node scripts/pack-plugin.mjs plugins/theme
 单个插件 GitHub Release：
 
 ```sh
-gh release create "@local/intellecxplore-theme@1.1.2" \
+gh release create "@intellecxplore/plugin-theme@1.1.2" \
   dist/theme/*.tgz \
   --title "intellecxplore-theme 1.1.2" \
   --notes "…"
@@ -136,13 +136,13 @@ gh release create "@local/intellecxplore-theme@1.1.2" \
 - patch 的 `config` 是整体替换，不是深合并；行 `id` 必须唯一，避免 10 个插件互相覆盖。
 - 10 个“品牌主题”不建议做 10 个 bundle：每个都停用 `ui-brand-official`、覆盖同一批 token 会互斥。更合适的是一个 theme 插件注册 10 个 `ThemeDefinition`，用户在主题列表切换。
 - Client 共享代码不能直接 `require` 一个未注册的 workspace 包；需要 esbuild/tsdown 打包进每个 `client.js`，或接受复制代码。
-- 每个包发布前补 `engines.dsh`，并实测预发布版本的 semver 匹配。
+- 每个包声明 `engines.dsh` 时需实测预发布版本的 semver 匹配；当前 theme 已声明 `>=0.2.1-rc.2 <0.3.0`。
 - 安装/重装统一走 `plugin_manager` 或 `dsh plugin --profile <p> add ...`，不要手写 profile。
 
 ## 当前插件
 
 - 目录：`plugins/theme`
-- 包名：`@local/intellecxplore-theme`
+- 包名：`@intellecxplore/plugin-theme`
 - 版本：`1.1.2`
 - profile：`desktop`，通过 `link:` 指向本目录
 - 文档：`plugins/theme/README.md`、`plugins/theme/AGENTS.md`
@@ -150,16 +150,26 @@ gh release create "@local/intellecxplore-theme@1.1.2" \
 
 ## 发布到线上
 
-当前包是 `private: true` + `@local` scope，**不能直接公开发布**。公开前：
+当前包已按公开 npm 配置：
 
-1. 换真实 scope（例如 `@intellecxplore/dsh-theme`）；
-2. 去掉 `private`，补根 `LICENSE`、`repository`、`homepage`、`author`、`keywords`；
-3. 补并实测 `engines.dsh`；
-4. 确认品牌素材授权；
-5. `npm publish --access public`，或上传 GitHub Release tarball；
-6. 向 [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin) 提交条目（`category: theme`）。
+- 包名：`@intellecxplore/plugin-theme`
+- 已补 `LICENSE`（MIT）、`NOTICE`（品牌资产）、`repository`、`homepage`、`keywords`、`engines.dsh`
+- GitHub 仓库已公开；固定名资产 `intellecxplore-theme.tgz` 提供 latest tarball
 
-monorepo 子包上架时，条目 `url` 指向子目录，`name` 用 `owner/repo#subname`。
+npm 发布（需要 npm 账号拥有 `@intellecxplore` scope）：
+
+```sh
+cd plugins/theme
+npm publish --access public
+```
+
+安装：
+
+```sh
+dsh plugin --profile desktop add @intellecxplore/plugin-theme
+```
+
+上架 dshmarket 时，向 [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin) 提交 `category: theme` 条目；monorepo 子包的 `url` 指向 `plugins/theme`，`name` 用 `owner/repo#theme`。
 
 ## Git
 
@@ -169,7 +179,7 @@ monorepo 子包上架时，条目 `url` 指向子目录，`name` 用 `owner/repo
 
 ```sh
 git tag
-# @local/intellecxplore-theme@1.1.2
+# @intellecxplore/plugin-theme@1.1.2
 ```
 
 后续提交与标签：

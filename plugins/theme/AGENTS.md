@@ -4,13 +4,13 @@
 
 ## 项目定位
 
-`@local/intellecxplore-theme` 是本地 DSH profile 插件包：用 **智域探金 / IntellecXplore** 品牌重绘 DeepSeek Harness Web UI。它不是通用主题市场包，品牌名、色板、字标和文案是固定产品决策。
+`@intellecxplore/plugin-theme` 是面向公开 npm 的 DSH 插件包：用 **智域探金 / IntellecXplore** 品牌重绘 DeepSeek Harness Web UI。它不是通用主题市场包，品牌名、色板、字标和文案是固定产品决策。
 
 ## 目录职责
 
 | 文件 | 职责 |
 |---|---|
-| `cordis.patch.yml` | 停用 `ui-brand-official`；插入品牌行 `intellecXplore-theme` 与资产行 `intellecXplore-theme-assets` |
+| `cordis.patch.yml` | 停用 `ui-brand-official`；插入品牌行 `intellecxplore-plugin-theme` 与资产行 `intellecxplore-plugin-theme-assets` |
 | `index.js` | 品牌 Host 行，只做生命周期日志；保持最小 |
 | `assets-server.js` | 资产 Host 行：3 个 exact PNG 路由，GET/HEAD |
 | `client.js` | 全部品牌逻辑：token、slot、字体、文案、设置面板、favicon/title |
@@ -28,7 +28,7 @@
    node -e 'JSON.parse(require("fs").readFileSync("package.json","utf8"))'
    ```
 3. 重载插件（当前 `desktop` profile）：
-   - 使用 `plugin_manager` 的 `set_bundle`，目标 `@local/intellecxplore-theme`，先 `false` 再 `true`；
+   - 使用 `plugin_manager` 的 `set_bundle`，目标 `@intellecxplore/plugin-theme`，先 `false` 再 `true`；
    - 不要手写 profile 的 `package.json` / `cordis.patch.yml`，不要在 profile 目录跑 pnpm。
 4. 刷新页面；Host 半边代码变更通常需要重启宿主或重新加载模块行。
 5. 抽查：
@@ -47,7 +47,7 @@
 - 所有注册（slot、theme、locale、observer、style、favicon）都要在 `ctx.effect` / `ctx.on` 里返回 cleanup。
 - 有 `exports` 就必须导出 `./package.json`、`./locale/*.json`、`./icon`、`./client`、`./assets-server`，否则展示元数据或加载会静默失效。
 - 不提交临时/中间文档或审查快照；项目文档只保留 `README.md`、`AGENTS.md`、`skills/`（含 `PROVENANCE.txt`、`LICENSE`）。
-- 不擅自新增 `engines.dsh`；当前是本地私有包，分发前再补并实测。
+- `engines.dsh` 已声明 `>=0.2.1-rc.2 <0.3.0`；修改区间前需在目标 DSH 版本上实测。
 
 ## 当前视觉行为（不要回退）
 
