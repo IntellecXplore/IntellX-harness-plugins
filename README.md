@@ -165,12 +165,19 @@ monorepo 子包上架时，条目 `url` 指向子目录，`name` 用 `owner/repo
 
 本目录是一个**独立 git 仓库**，嵌套在个人 home 仓库下。父仓库不要把本目录 `git add` 进去；tag/Release 都只在本仓库内操作。
 
-首次：
+已初始化 `main`，完成首个提交，并已创建首个 tag：
 
 ```sh
-git init -b main
+git tag
+# @local/intellecxplore-theme@1.1.1
+```
+
+后续提交与标签：
+
+```sh
 git add .
-git commit -m "chore: scaffold intellecxplore-dsh monorepo"
+git commit -m "feat(theme): ..."
+pnpm tag:theme
 ```
 
 ## 文档
