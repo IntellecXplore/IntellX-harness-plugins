@@ -26,7 +26,7 @@ Agent 维护约束见 [AGENTS.md](AGENTS.md)。
 intellecXplore-theme/
 ├── cordis.patch.yml      # 停用官方品牌行；插入品牌行 + 资产行
 ├── index.js              # 品牌 Host 行：仅生命周期日志
-├── assets-server.js      # 资产 Host 行：注册 3 个同源 PNG 路由
+├── assets-server.js      # 资产 Host 行：注册 14 个同源品牌资产路由
 ├── client.js             # Client 半边：主题 token / slot / 文案 / 设置面板
 ├── icon.png              # 插件管理器图标
 ├── assets/
@@ -50,8 +50,11 @@ intellecXplore-theme/
 | `/intellecxplore/brand/wordmark.png` | `assets/logo-wordmark.png` |
 | `/intellecxplore/brand/mark.png` | `assets/logo-mark.png` |
 | `/intellecxplore/brand/icon.png` | `icon.png` |
+| `/intellecxplore/brand/favicon.ico` | `assets/favicon.ico` |
+| `/intellecxplore/brand/icon-{16,32,48,64,128,180,192,256,512}.png` | `assets/icon-*.png` |
+| `/intellecxplore/brand/manifest.webmanifest` | `assets/manifest.webmanifest` |
 
-均为 `GET/HEAD`、`image/png`、`Cache-Control: public, max-age=60`；Client 只引用 URL，不内嵌 base64。
+均为 `GET/HEAD`、`Cache-Control: public, max-age=60`；PNG 为 `image/png`，ICO 为 `image/x-icon`，manifest 为 `application/manifest+json`。Client 只引用 URL，不内嵌 base64。
 
 ### Client 品牌层
 
@@ -84,7 +87,7 @@ intellecXplore-theme/
 ## 安装与更新
 
 - 已安装到 `desktop` profile；profile 依赖是 `link:` 指向本目录。
-- npm 安装（发布后）：
+- npm 安装：
 
   ```sh
   dsh plugin --profile desktop add @intellecxplore/plugin-theme
@@ -94,8 +97,16 @@ intellecXplore-theme/
 - 资产路由可直接验证：
 
 ```sh
-curl -I http://127.0.0.1:63814/intellecxplore/brand/wordmark.png
+curl -I http://127.0.0.1:59376/intellecxplore/brand/wordmark.png
 ```
+
+## Windows 图标
+
+- Web UI/PWA 图标由插件接管：
+  - `favicon.ico`：16/32/48/64/128/256 多尺寸，Windows 浏览器标签页/快捷方式优先使用；
+  - `icon-16/32/180/192/256/512.png`：浏览器、Apple touch、PWA manifest；
+  - `manifest.webmanifest`：Edge/Chrome 安装为应用后，Windows 11 任务栏/开始菜单使用 192/256/512 图标。
+- **DSH Windows 桌面客户端本体**（`.exe`、安装包、未启动时的任务栏/开始菜单图标）属于宿主应用资源，插件无法替换；需要在桌面客户端打包/安装器层用同样的品牌图标重建或替换，不能用本插件实现。
 
 ## 验证状态
 
@@ -103,7 +114,7 @@ curl -I http://127.0.0.1:63814/intellecxplore/brand/wordmark.png
 
 - `node --check client.js`、`assets-server.js`、JSON/YAML 解析。
 - `exports` 子路径 `package.json` / `locale/zh.json` / `icon` / `client` 均可从 profile 解析。
-- 三个资产路由返回 `200 image/png`。
+- 品牌资产路由（wordmark/mark/icon/favicon/尺寸 PNG/manifest）返回 `200`。
 - `ui-brand-official` 状态为 `inactive`；`conversation.hero.brand.mark` 已有占用。
 - 技能 frontmatter 合法，相对链接 0 缺失。
 
