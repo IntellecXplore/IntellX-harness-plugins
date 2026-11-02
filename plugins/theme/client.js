@@ -6,7 +6,11 @@ window.__ModuleLoader__.load({
 
     const WORDMARK = "/intellecxplore/brand/wordmark.png"
     const MARK = "/intellecxplore/brand/mark.png"
-    const FAVICON = "/intellecxplore/brand/icon.png"
+    const FAVICON = "/intellecxplore/brand/favicon.ico"
+    const FAVICON_16 = "/intellecxplore/brand/icon-16.png"
+    const FAVICON_32 = "/intellecxplore/brand/icon-32.png"
+    const APPLE_TOUCH = "/intellecxplore/brand/icon-180.png"
+    const MANIFEST = "/intellecxplore/brand/manifest.webmanifest"
 
     const TOKENS = {
       "--dsw-alias-bg-base": { light: "#ffffff", dark: "#070c1c" },
@@ -131,7 +135,7 @@ window.__ModuleLoader__.load({
           "aria-label": text,
           title: text,
           "data-ix-brand-name": "true",
-          style: maskStyle(WORDMARK, 132, 25, "var(--dsw-alias-label-primary)"),
+          style: maskStyle(WORDMARK, 118, 22.35, "var(--dsw-alias-label-primary)"),
         }),
         h("span", {
           "aria-hidden": "true",
@@ -140,15 +144,15 @@ window.__ModuleLoader__.load({
             alignSelf: "flex-start",
             display: "inline-flex",
             alignItems: "center",
-            height: 16,
-            padding: "0 6px",
-            borderRadius: 3,
+            height: 14,
+            padding: "0 5px",
+            borderRadius: 2,
             background: "var(--dsw-alias-label-primary)",
             color: "var(--dsw-alias-bg-base)",
-            fontSize: 9,
+            fontSize: 8,
             fontWeight: 600,
-            letterSpacing: "0.08em",
-            lineHeight: "16px",
+            letterSpacing: "0.1em",
+            lineHeight: "14px",
             whiteSpace: "nowrap",
             flex: "0 0 auto",
           },
@@ -259,13 +263,30 @@ window.__ModuleLoader__.load({
 
     function installFavicon() {
       if (typeof document === "undefined" || !document.head) return () => {}
-      const link = document.createElement("link")
-      link.rel = "icon"
-      link.type = "image/png"
-      link.href = FAVICON
-      link.dataset.ixFavicon = "true"
-      document.head.appendChild(link)
-      return () => link.remove()
+      const previous = []
+      for (const node of document.querySelectorAll('link[rel~="icon"], link[rel="apple-touch-icon"], link[rel="manifest"]')) {
+        if (node.dataset.ixFavicon === "true") continue
+        previous.push(node)
+        node.remove()
+      }
+      const definitions = [
+        { rel: "icon", type: "image/x-icon", href: FAVICON, sizes: "any" },
+        { rel: "icon", type: "image/png", href: FAVICON_16, sizes: "16x16" },
+        { rel: "icon", type: "image/png", href: FAVICON_32, sizes: "32x32" },
+        { rel: "apple-touch-icon", href: APPLE_TOUCH, sizes: "180x180" },
+        { rel: "manifest", href: MANIFEST },
+      ]
+      const created = definitions.map((definition) => {
+        const link = document.createElement("link")
+        for (const [key, value] of Object.entries(definition)) link.setAttribute(key, value)
+        link.dataset.ixFavicon = "true"
+        document.head.appendChild(link)
+        return link
+      })
+      return () => {
+        for (const link of created) link.remove()
+        for (const link of previous) document.head.appendChild(link)
+      }
     }
 
     return {

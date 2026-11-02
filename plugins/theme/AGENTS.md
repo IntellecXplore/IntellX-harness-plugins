@@ -12,7 +12,7 @@
 |---|---|
 | `cordis.patch.yml` | 停用 `ui-brand-official`；插入品牌行 `intellecxplore-plugin-theme` 与资产行 `intellecxplore-plugin-theme-assets` |
 | `index.js` | 品牌 Host 行，只做生命周期日志；保持最小 |
-| `assets-server.js` | 资产 Host 行：3 个 exact PNG 路由，GET/HEAD |
+| `assets-server.js` | 资产 Host 行：14 个 exact 品牌资产路由（PNG/ICO/manifest），GET/HEAD |
 | `client.js` | 全部品牌逻辑：token、slot、字体、文案、设置面板、favicon/title |
 | `package.json` | `dsh.bundle` + `dsh.client` + exports/files |
 | `README.md` | 用户/维护者文档，单一事实来源 |
@@ -33,7 +33,7 @@
 4. 刷新页面；Host 半边代码变更通常需要重启宿主或重新加载模块行。
 5. 抽查：
    ```sh
-   curl -I http://127.0.0.1:63814/intellecxplore/brand/wordmark.png
+   curl -I http://127.0.0.1:59376/intellecxplore/brand/wordmark.png
    ```
    以及 `cordis_inspect_query` 的 `Slots.listSubTree`。
 
@@ -48,13 +48,14 @@
 - 有 `exports` 就必须导出 `./package.json`、`./locale/*.json`、`./icon`、`./client`、`./assets-server`，否则展示元数据或加载会静默失效。
 - 不提交临时/中间文档或审查快照；项目文档只保留 `README.md`、`AGENTS.md`、`skills/`（含 `PROVENANCE.txt`、`LICENSE`）。
 - `engines.dsh` 已声明 `>=0.2.1-rc.2 <0.3.0`；修改区间前需在目标 DSH 版本上实测。
+- **Windows 桌面 app 的 exe/任务栏本体图标不在插件内伪造**；插件只负责 Web favicon/PWA manifest，宿主资源需在桌面客户端层替换。
 
 ## 当前视觉行为（不要回退）
 
-- 侧栏展开态：`brandMark` 隐藏，`IntellecXplore` wordmark 在整行居中；wordmark 右侧的 HARNESS 徽标顶部对齐；折叠 rail 与空白会话 hero 仍显示 X mark。
+- 侧栏展开态：`brandMark` 隐藏，`IntellecXplore` wordmark（118×22.35）在整行居中；wordmark 右侧 HARNESS 徽标（14px 高、8px 字号）顶部对齐；折叠 rail 与空白会话 hero 仍显示 X mark。
 - running 状态：鲸鱼尾巴替换为 X mark；文案显示“智域探金中”，波纹高亮层也必须是“智域探金中”。
 - 设置面板：Light `#fff`，Dark `#2c2c2e`；输入框 Dark `#232324`。
-- favicon 与插件管理器图标使用 `icon.png` / `/intellecxplore/brand/icon.png`。
+- favicon/PWA 图标使用 `favicon.ico` + `icon-16/32/180/192/256/512.png` + `manifest.webmanifest`；插件管理器图标仍用 `icon.png`。
 
 ## 升级敏感点
 

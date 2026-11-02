@@ -41,6 +41,8 @@
     "locale/*.json",
     "icon.png",
     "assets/*.png",
+    "assets/*.ico",
+    "assets/*.webmanifest",
     "skills/**/*",
     "README.md",
     "AGENTS.md",
